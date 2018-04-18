@@ -35,10 +35,18 @@
 			class="form-signin">
 			<h2 class="form-signin-heading">Create report</h2>
 
+			<spring:bind path="title">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<form:input type="text" path="title" class="form-control"
+						placeholder="Title" autofocus="true"></form:input>
+					<form:errors path="date"></form:errors>
+				</div>
+			</spring:bind>
+
 			<spring:bind path="date">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input type="date" path="date" class="form-control"
-						placeholder="Date" autofocus="true"></form:input>
+						placeholder="Date"></form:input>
 					<form:errors path="date"></form:errors>
 				</div>
 			</spring:bind>
@@ -50,6 +58,9 @@
 					<form:errors path="content"></form:errors>
 				</div>
 			</spring:bind>
+			
+			<input type="file" name="uploadedFileName" placeholder="File Upload">
+  			<input type="submit" name="import_file" value="Import File" id="" />
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 

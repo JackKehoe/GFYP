@@ -24,7 +24,8 @@ public class ReportValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Report report = (Report) o;
-
+        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "NotEmpty");
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "NotEmpty");
         

@@ -19,6 +19,7 @@ import javax.persistence.Table;
 public class Report {
 	
 	private int id;
+	private String title;
 	private String date;
 	private String content;
 	
@@ -44,6 +45,13 @@ public class Report {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public String getDate() {
 		return date;

@@ -19,6 +19,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void save(Report report, String name) {
     	User user = userRepository.findByUsername(name);
+    	report.setTitle(report.getTitle());
     	report.setDate(report.getDate());
     	report.setContent(report.getContent());
     	report.setUser(user);

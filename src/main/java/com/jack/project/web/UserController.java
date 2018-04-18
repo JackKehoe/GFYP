@@ -47,9 +47,7 @@ public class UserController {
     	List<Skill> skills = currentUser.getSkills();
     	List<Goal> goal = currentUser.getGoals();
     	List<Report> savedReports = currentUser.getReports();
-
-
-        
+ 
        model.addAttribute("skills", skills);
        model.addAttribute("goal", goal);
        model.addAttribute("savedReports", savedReports);

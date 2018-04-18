@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Welcome</title>
+<title>Homepage</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -31,39 +31,39 @@
 			<h2>Current logged in user:
 				${pageContext.request.userPrincipal.name}</h2>
 			<br>
-			<h3>
-				Your Skills:
-				<table>
-					<c:forEach var="o" items="${skills}">
-						<tr>
-							<td>Name: <c:out value="${o.skillName}" /></td>
-							<td>| Category: <c:out value="${o.category}" />
-							</td>
-						</tr>
-					</c:forEach>
-				</table>
-			</h3>
+			
+				Skills:	
+				<c:forEach items="${skills}" var="skill">
+				<div class="panel panel-default">
+					<div class="panel-body-center">
+						<b>Name:</b>${skill.skillName}<br>
+						 <b>Category:</b>${skill.category}<br>
+						<div id="mainwrap"></div>
+					</div>
+				</div>
+			</c:forEach>
 			<br>
-			<h3>
-				Your Goal:
-				<c:forEach var="o" items="${goal}">
-					<tr>
-						<td><c:out value="${o.goalName}" /></td>
-					</tr>
-				</c:forEach>
-			</h3>
+			Goal:
+			<c:forEach items="${goal}" var="goal">
+				<div class="panel panel-default">
+					<div class="panel-body-center">
+						<b></b>${goal.goalName}<br>
+						<div id="mainwrap"></div>
+					</div>
+				</div>
+			</c:forEach>
 			<br>
-			<h3>
-				Your reports:
-				<table>
-					<c:forEach var="o" items="${savedReports}">
-						<tr>
-							<td>Report date: <c:out value="${o.date}" /></td>
-							<td>| Content: <c:out value="${o.content}" /></td>
-						</tr>
-					</c:forEach>
-				</table>
-			</h3>
+			Reports:
+			<c:forEach items="${savedReports}" var="report">
+				<div class="panel panel-default">
+					<div class="panel-body-center">
+						<b>Title: </b>${report.title}<br> 
+						<b>Date: </b>${report.date}<br>
+						<b>Content: </b>${report.content}<br>
+						<div id="mainwrap"></div>
+					</div>
+				</div>
+			</c:forEach>
 
 			<h4>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>

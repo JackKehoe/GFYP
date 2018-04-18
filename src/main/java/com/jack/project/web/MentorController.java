@@ -35,7 +35,7 @@ public class MentorController {
 	@RequestMapping(value = "/mentorhomepage", method = RequestMethod.GET)
 	public String mentorhomepage(Model model, Principal p) throws IOException {
 
-		List<User> userList = userRepository.findAll();
+		List<User> userList = userRepository.findByMentorFalse();
 		User currentUser = userService.findByUsername(p.getName());
 		List<User> students = currentUser.getStudents();
 		
@@ -46,10 +46,24 @@ public class MentorController {
 		return "mentorhomepage";
 	}
 	
-	@RequestMapping(value = "/mentorhomepage/{sort}", method = RequestMethod.GET)
-	public String homepageSort(@PathVariable String sort, Model model, Principal p) {
+	@RequestMapping(value = "/viewusers", method = RequestMethod.GET)
+	public String viewUsers(Model model, Principal p) throws IOException {
 
-		List<User> userList = userService.findAll();
+		List<User> userList = userRepository.findByMentorFalse();
+		User currentUser = userService.findByUsername(p.getName());
+		List<User> students = currentUser.getStudents();
+		
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("userList", userList);
+		model.addAttribute("students", students);
+
+		return "viewusers";
+	}
+	
+	@RequestMapping(value = "/viewusers/{sort}", method = RequestMethod.GET)
+	public String usersSort(@PathVariable String sort, Model model, Principal p) {
+
+		List<User> userList = userRepository.findByMentorFalse();;
 
 		if (sort.equals("username")) {
 			System.out.println(userList);
@@ -70,7 +84,7 @@ public class MentorController {
 		model.addAttribute("currentUser", userService.findByUsername(p.getName()));
 		model.addAttribute("userList", userList);
 
-		return "mentorhomepage";
+		return "viewusers";
 	}
 
 	
@@ -88,7 +102,7 @@ public class MentorController {
 		currentUser.saveStudent(user);
 		userRepository.save(currentUser);
 
-		return "addStudent";
+		return "redirect:/mentor/mentorhomepage";
 	}
 	
 	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)

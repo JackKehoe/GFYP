@@ -28,28 +28,30 @@
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 			</form>
-
-			<h4>Current logged in user:
-				${pageContext.request.userPrincipal.name}</h4>
 			<br>
-				My Students:
-				
-				<c:forEach items="${students}" var="user">
+			
+			<a class="dropdown-item"
+					href="${contextPath}/mentor/viewusers/username">Username</a>
+				<a class="dropdown-item"
+					href="${contextPath}/mentor/viewusers/email">Email</a>
+				<a class="dropdown-item"
+					href="${contextPath}/mentor/viewusers/school">School</a>
+					
+			<h4>
+				<c:forEach items="${userList}" var="user">
 					<div class="panel panel-default">
 						<div class="panel-body-center">
-						<a href=${contextPath}/mentor/mentorhomepage/${userId}>${user.username}</a><br>
+						<a href=${contextPath}/mentor/viewusers/${userId}>${user.username}</a><br>
 							<b>School:</b>${user.school}<br>
 							<b>Email:</b>${user.email}<br>
+							<b></b><a href="<c:url value='/mentor/addStudent/${user.id}' />"> Add Student </a><br>
 							<div id="mainwrap"></div>
 						</div>
 					</div>
+
 				</c:forEach>
-				
 			</h4>
 
-			<h4>
-				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
-			</h4>
 		</c:if>
 
 	</div>

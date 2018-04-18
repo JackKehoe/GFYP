@@ -29,7 +29,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="${contextPath}/mentor/mentorhomepage">
-						 Mentor</a>
+						 Gaisce</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<form class="navbar-form navbar-left" method="get"
@@ -42,6 +42,7 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/mentor/mentorhomepage">Homepage</a></li>
+						<li><a href="${contextPath}/mentor/viewusers">View Users</a></li>
 						<li><a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
 					</ul>
 
@@ -58,7 +59,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="${contextPath}/student/welcome">
-						Student</a>
+						Gaisce</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 
