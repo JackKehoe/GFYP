@@ -32,22 +32,28 @@
 			<h2>Current logged in user:
 				${pageContext.request.userPrincipal.name}</h2>
 			<br>
-
+			
+			<a class="dropdown-item"
+					href="${contextPath}/mentor/mentorhomepage/username">Username</a>
+				<a class="dropdown-item"
+					href="${contextPath}/mentor/mentorhomepage/email">Email</a>
+				<a class="dropdown-item"
+					href="${contextPath}/mentor/mentorhomepage/school">School</a>
+					
 			<h4>
-				All Users:
-				<table>
-					<c:forEach var="o" items="${userList}">
-						<tr>
-							<td>Name: <c:out value="${o.username}" /></td>
-							<td>| School: <c:out value="${o.school}" />
-							</td>
-							<td><a href="<c:url value='/mentor/addStudent/${o.id}' />">
-									Add Student </a>
-						</tr>
-					</c:forEach>
-				</table>
-			</h4>
+				<c:forEach items="${userList}" var="user">
+					<div class="panel panel-default">
+						<div class="panel-body-center">
+						<a href=${contextPath}/mentor/mentorhomepage/${userId}>${user.username}</a><br>
+							<b>School:</b>${user.school}<br>
+							<b>Email:</b>${user.email}<br>
+							<b></b><a href="<c:url value='/mentor/addStudent/${user.id}' />"> Add Student </a><br>
+							<div id="mainwrap"></div>
+						</div>
+					</div>
 
+				</c:forEach>
+			</h4>
 			<h4>
 				My Students:
 				<table>
@@ -55,7 +61,7 @@
 						<tr>
 							<td>Name: <c:out value="${o.username}" /></td>
 							<td>| School: <c:out value="${o.school}" />
-							</td>
+							</td> 
 						</tr>
 					</c:forEach>
 				</table>

@@ -3,6 +3,7 @@ package com.jack.project.web;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,34 @@ public class MentorController {
 
 		return "mentorhomepage";
 	}
+	
+	@RequestMapping(value = "/mentorhomepage/{sort}", method = RequestMethod.GET)
+	public String homepageSort(@PathVariable String sort, Model model, Principal p) {
+
+		List<User> userList = userService.findAll();
+
+		if (sort.equals("username")) {
+			System.out.println(userList);
+			Collections.sort(userList, (p1, p2) -> p1.getUsername().compareTo(p2.getUsername()));
+			System.out.println(userList);
+		}
+		if (sort.equals("school")) {
+			System.out.println(userList);
+			Collections.sort(userList, (p1, p2) -> p1.getSchool().compareTo(p2.getSchool()));
+			System.out.println(userList);
+		}
+		if (sort.equals("email")) {
+			System.out.println(userList);
+			Collections.sort(userList, (p1, p2) -> p1.getEmail().compareTo(p2.getEmail()));
+			System.out.println(userList);
+		}
+
+		model.addAttribute("currentUser", userService.findByUsername(p.getName()));
+		model.addAttribute("userList", userList);
+
+		return "mentorhomepage";
+	}
+
 	
 	@RequestMapping(value = " /addStudent/{userId}", method=RequestMethod.GET)
 	public String addStudent(@PathVariable("userId")int id, Model model, Principal p) {
@@ -100,5 +129,6 @@ public class MentorController {
 
 		return "mentorhomepage";
 	}
+	
 
 }

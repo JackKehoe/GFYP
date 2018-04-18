@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -68,6 +69,11 @@ public class UserServiceImpl implements UserService {
 	public void addStudent(User user, User currentUser) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 	
 }
