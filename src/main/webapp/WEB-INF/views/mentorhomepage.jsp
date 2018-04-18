@@ -36,7 +36,7 @@
 			<h4>
 				All Users:
 				<table>
-					<c:forEach var="o" items="${users}">
+					<c:forEach var="o" items="${userList}">
 						<tr>
 							<td>Name: <c:out value="${o.username}" /></td>
 							<td>| School: <c:out value="${o.school}" />

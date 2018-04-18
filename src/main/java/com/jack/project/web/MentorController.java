@@ -2,6 +2,7 @@ package com.jack.project.web;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jack.project.model.*;
 import com.jack.project.repository.UserRepository;
@@ -32,11 +34,12 @@ public class MentorController {
 	@RequestMapping(value = "/mentorhomepage", method = RequestMethod.GET)
 	public String mentorhomepage(Model model, Principal p) throws IOException {
 
+		List<User> userList = userRepository.findAll();
 		User currentUser = userService.findByUsername(p.getName());
 		List<User> students = currentUser.getStudents();
 		
 		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("users", userRepository.findAll());
+		model.addAttribute("userList", userList);
 		model.addAttribute("students", students);
 
 		return "mentorhomepage";
@@ -76,6 +79,26 @@ public class MentorController {
 		userService.addStudent(user, currentUser);
 
 		return "redirect:/customer/book/{id}";
+	}
+	
+	@RequestMapping(value = { "/search" }, method = RequestMethod.GET)
+	public String search(@RequestParam("searchString") String searchString, Model model, Principal principal) {
+		List<User> users = userRepository.findAll();
+		List<User> students = new ArrayList<>();
+		User currentUser = userService.findByUsername(principal.getName());
+
+		for (User user : users) {
+			if (user.getUsername().toLowerCase().contains(searchString.toLowerCase())
+					|| user.getFirstname().toLowerCase().contains(searchString.toLowerCase())
+					|| user.getLastname().toLowerCase().contains(searchString.toLowerCase())
+					|| user.getLastname().toLowerCase().contains(searchString.toLowerCase())) {
+				students.add(user);
+			}
+		}
+
+		model.addAttribute("userList", students);
+
+		return "mentorhomepage";
 	}
 
 }
