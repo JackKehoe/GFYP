@@ -49,7 +49,7 @@ public class LoginController {
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
         
         if(userForm.isMentor()==true) {
-    		return "redirect:/mentor/welcome ";
+    		return "redirect:/mentor/mentorhomepage ";
     	}
 
         return "redirect:/student/welcome";
@@ -70,7 +70,7 @@ public class LoginController {
     public String home(Model model, String error, Principal p) {
     	User currentUser = userService.findByUsername(p.getName());
     	if(currentUser.isMentor()) {
-    		return "redirect:/mentor/welcome";
+    		return "redirect:/mentor/mentorhomepage";
     	}else
     		return "redirect:/student/welcome";
     	

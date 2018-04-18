@@ -30,6 +30,7 @@ public class User {
 	private List<Skill> skills;
 	private List<Goal> goals;
 	private List<Report> reports;
+	private List<User> students;
 
 	
 	public User(){
@@ -69,6 +70,20 @@ public class User {
 
 	public void setReports(List<Report> reports) {
 		this.reports = reports;
+	}
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "students",
+			joinColumns = @JoinColumn(name = "userId"),
+			inverseJoinColumns = @JoinColumn(name = "studentId"))
+	public List<User> getStudents(){
+    	return students;
+    }
+	
+
+
+	public void setStudents(List<User> students) {
+		this.students = students;
 	}
 
 	@Id
@@ -156,6 +171,10 @@ public class User {
 	public void addReport(Report reportForm) {
 		reports.add(reportForm);
 		
+	}
+
+	public void saveStudent(User user) {
+		students.add(user);
 	}
 
 }

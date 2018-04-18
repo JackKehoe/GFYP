@@ -11,6 +11,7 @@
         <intercept-url pattern="/" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/" access="hasRole('ROLE_MENTOR')" />
 		<intercept-url pattern="/mentor/**" access="hasRole('ROLE_MENTOR')" />
+		<intercept-url pattern="/mentor/mentorhomepage" access="hasRole('ROLE_MENTOR')" />
 		<intercept-url pattern="/student/**" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/student/goal" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/student/report" access="hasRole('ROLE_STUDENT')" />

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,39 +32,34 @@
 			<h2>Current logged in user:
 				${pageContext.request.userPrincipal.name}</h2>
 			<br>
-			<h3>
-				Your Skills:
+
+			<h4>
+				All Users:
 				<table>
-					<c:forEach var="o" items="${skills}">
+					<c:forEach var="o" items="${users}">
 						<tr>
-							<td>Name: <c:out value="${o.skillName}" /></td>
-							<td>| Category: <c:out value="${o.category}" />
+							<td>Name: <c:out value="${o.username}" /></td>
+							<td>| School: <c:out value="${o.school}" />
+							</td>
+							<td><a href="<c:url value='/mentor/addStudent/${o.id}' />">
+									Add Student </a>
+						</tr>
+					</c:forEach>
+				</table>
+			</h4>
+
+			<h4>
+				My Students:
+				<table>
+					<c:forEach var="o" items="${students}">
+						<tr>
+							<td>Name: <c:out value="${o.username}" /></td>
+							<td>| School: <c:out value="${o.school}" />
 							</td>
 						</tr>
 					</c:forEach>
 				</table>
-			</h3>
-			<br>
-			<h3>
-				Your Goal:
-				<c:forEach var="o" items="${goal}">
-					<tr>
-						<td><c:out value="${o.goalName}" /></td>
-					</tr>
-				</c:forEach>
-			</h3>
-			<br>
-			<h3>
-				Your reports:
-				<table>
-					<c:forEach var="o" items="${savedReports}">
-						<tr>
-							<td>Report date: <c:out value="${o.date}" /></td>
-							<td>| Content: <c:out value="${o.content}" /></td>
-						</tr>
-					</c:forEach>
-				</table>
-			</h3>
+			</h4>
 
 			<h4>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
@@ -71,7 +67,6 @@
 		</c:if>
 
 	</div>
-	<!-- /container -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>

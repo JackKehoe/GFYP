@@ -45,6 +45,11 @@ public class dbTesting {
 
 		Set<GrantedAuthority> grantedAuthoritiesMentor = new HashSet<>();
 		grantedAuthoritiesMentor.add(new SimpleGrantedAuthority(roleMentor.getName()));
+		
+		HashSet<Role> roles = new HashSet<>();
+		roles.add(roleStudent);
+		HashSet<Role> roles1 = new HashSet<>();
+		roles1.add(roleMentor);
 
 		User user = new User();
 		String password = "test";
@@ -56,10 +61,9 @@ public class dbTesting {
 		user.setSchool("Naas CBS");
 		user.setMentor(false);
 		
-		HashSet<Role> roles = new HashSet<>();
-		roles.add(roleStudent);
 		user.setRoles(roles);
 		userRepository.save(user);
+
 		
 		User user2 = new User();
 		String password2 = "test1";
@@ -75,17 +79,18 @@ public class dbTesting {
 		userRepository.save(user2);	
 		
 		
-//		Mentor mentor = new Mentor();
-//		String password3 = "test";
-//		mentor.setUsername("Mentor1");
-//		mentor.setPassword(bCryptPasswordEncoder.encode(password3));
-//		mentor.setEmail("mentor@gmail.com");
-//		mentor.setFirstname("Brian");
-//		mentor.setLastname("Walzer");
-//		mentor.setSchool("Naas CBS");
-//		
-//		mentor.setRoles(roles);
-//		mentorRepository.save(mentor);
+		User mentor = new User();
+		String password3 = "test";
+		mentor.setUsername("Mentor1");
+		mentor.setPassword(bCryptPasswordEncoder.encode(password3));
+		mentor.setEmail("mentor@gmail.com");
+		mentor.setFirstname("Brian");
+		mentor.setLastname("Walzer");
+		mentor.setSchool("Naas CBS");
+		mentor.setMentor(true);
+		
+		mentor.setRoles(roles1);
+		userRepository.save(mentor);
 		
 
 	}

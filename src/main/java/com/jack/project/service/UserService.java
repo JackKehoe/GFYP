@@ -11,4 +11,9 @@ public interface UserService {
 
     User findByUsername(String username);
 
+	void addStudent(User user, User currentUser);
+
+	User findById(int id);
+
+
 }
