@@ -1,10 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,61 +11,65 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Create a report</title>
+<title>Homepage</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 
 </head>
-
 <body>
 
-	<div class="container">
-		<jsp:include page="navbar.jsp"></jsp:include>
+	<jsp:include page="navbar.jsp"></jsp:include>
 
-		<form:form method="POST" modelAttribute="reportForm"
-			class="form-signin">
-			<h2 class="form-signin-heading">Create report</h2>
+	<div class="row">
 
-			<spring:bind path="title">
-				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="text" path="title" class="form-control"
-						placeholder="Title" autofocus="true"></form:input>
-					<form:errors path="date"></form:errors>
+		<div class="col-lg-3">
+			<div id="logbox"></div>
+
+		</div>
+
+		<div class="col-md-4">
+			<div id="logbox">
+				<div class="panel-group">
+					<div class="panel panel-default">
+						<div class="panel-body-center">
+							<b><a href=${contextPath}/student/report/${book.id}>${report.title}</a></b><br>
+							<b>Title: </b>${report.title} <br>
+							<b>Date: </b>${report.date} <br>
+							<b>Text: </b>${report.content} <br>
+							<c:if test="${pageContext.request.isUserInRole('ROLE_STUDENT')}">
+								<br>
+								<a href="${contextPath}/student/report/edit/${report.id}">Edit</a>
+							</c:if>
+						</div>
+					</div>
+					<div class="col-md-7">
+						<c:if test="${pageContext.request.isUserInRole('ROLE_MENTOR')}">
+							<form:form commandName="commentForm"
+								action="${contextPath}/mentor/comment/${comment.id}"
+								method="POST">
+								<form:input path="content" placeholder="Write a comment"
+									cssClass="form-control" />
+								<input type="submit" class="btn btn-failure btn-sm" value="Post" />
+							</form:form>
+						</c:if>
+						&nbsp;
+						<c:forEach items="${comments}" var="comment">
+							<div class="panel panel-default">
+								<div class="panel-body">
+									<b>${comment.mentor.username} commented:</b> ${comment.content}
+								</div>
+								<div class="panel-footer">${comment.timeStamp}</div>
+							</div>
+						</c:forEach>
+					</div>
 				</div>
-			</spring:bind>
-
-			<spring:bind path="date">
-				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="date" path="date" class="form-control"
-						placeholder="Date"></form:input>
-					<form:errors path="date"></form:errors>
-				</div>
-			</spring:bind>
-
-			<spring:bind path="content">
-				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="text" path="content" class="form-control"
-						placeholder="Content"></form:input>
-					<form:errors path="content"></form:errors>
-				</div>
-			</spring:bind>
-			
-			<input type="file" name="uploadedFileName" placeholder="File Upload">
-  			<input type="submit" name="import_file" value="Import File" id="" />
-
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-
-		</form:form>
+			</div>
+			<div class="col-md-7"></div>
+		</div>
 	</div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
-
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

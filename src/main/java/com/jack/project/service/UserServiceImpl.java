@@ -40,11 +40,12 @@ public class UserServiceImpl implements UserService {
 			userRepository.save(user);
 		} else {
 			Role student = roleRepository.findByName("ROLE_STUDENT");
-			Set<Role>studentRoles = new HashSet<>();
+			Set<Role> studentRoles = new HashSet<>();
 			studentRoles.add(student);
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 			user.setRoles(studentRoles);
 			user.setEmail(user.getEmail());
+			user.setUsername(user.getUsername());
 			user.setFirstname(user.getFirstname());
 			user.setLastname(user.getLastname());
 			user.setSchool(user.getSchool());
@@ -56,19 +57,38 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void update(User userForm, User user) {
+
+		Role student = roleRepository.findByName("ROLE_STUDENT");
+		Set<Role> studentRoles = new HashSet<>();
+		studentRoles.add(student);
+		user.setRoles(studentRoles);
+
+		user.setPassword(user.getPassword());
+		user.setUsername(user.getUsername());
+		user.setFirstname(user.getFirstname());
+		user.setLastname(userForm.getLastname());
+		user.setEmail(user.getEmail());
+		user.setReports(user.getReports());
+		user.setSkills(user.getSkills());
+		user.setGoals(user.getGoals());
+		userRepository.save(user);
+	}
+
+	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
-	
+
 	@Override
 	public User findById(int id) {
 		return userRepository.findById(id);
 	}
-	
+
 	@Override
 	public void addStudent(User user, User currentUser) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -80,5 +100,5 @@ public class UserServiceImpl implements UserService {
 	public User findByMentor(boolean mentor) {
 		return userRepository.findByMentor(mentor);
 	}
-	
+
 }

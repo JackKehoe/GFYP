@@ -1,9 +1,12 @@
 package com.jack.project.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -12,20 +15,16 @@ import javax.persistence.Table;
 @Table(name="comment")
 public class Comment {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	
 	private int id;
 	private String content;
 	private String timeStamp;
 	
+	private User user;
+	private Report report;
+	
 	public Comment(){
 		
-	}
-	
-	public Comment(String content, String timeStamp) {
-		super();
-		this.content = content;
-		this.timeStamp = timeStamp;
 	}
 
 	public String getContent() {
@@ -35,7 +34,9 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -50,5 +51,27 @@ public class Comment {
 
 	public void setTimeStamp(String timeStamp) {
 		this.timeStamp = timeStamp;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return user;
+	}
+	
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="report_id")
+	public Report getReport() {
+		return report;
+	}
+	
+	
+	public void setReport(Report report) {
+		this.report = report;
 	}
 }

@@ -73,8 +73,9 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/student/welcome">Homepage</a></li>
+						<li><a href="${contextPath}/student/account">Account</a></li>
 						<li><a href="${contextPath}/student/skill">Skills </a></li>
-						<li><a href="${contextPath}/student/report">Reports </a></li>
+						<li><a href="${contextPath}/student/addreport">Reports </a></li>
 						<li><a href="${contextPath}/student/goal">Goals </a></li>
 						<li><a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
 					</ul>

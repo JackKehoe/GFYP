@@ -6,4 +6,6 @@ public interface ReportService {
     void save(Report report, String name);
 
     Report findById(int id);
+
+	void save(Report report);
 }

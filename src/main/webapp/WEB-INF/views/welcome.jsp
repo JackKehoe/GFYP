@@ -36,8 +36,7 @@
 				<c:forEach items="${skills}" var="skill">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
-						<b>Name:</b>${skill.skillName}<br>
-						 <b>Category:</b>${skill.category}<br>
+						<b>Name:</b>${skill.skillName}<br> <b>Category:</b>${skill.category}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
@@ -57,7 +56,7 @@
 			<c:forEach items="${savedReports}" var="report">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
-						<b>Title: </b>${report.title}<br> 
+						<b><a href=${contextPath}/student/report/${report.id}>${report.title}</a></b><br>
 						<b>Date: </b>${report.date}<br>
 						<b>Content: </b>${report.content}<br>
 						<div id="mainwrap"></div>
@@ -71,7 +70,7 @@
 		</c:if>
 
 	</div>
-	<!-- /container -->
+	<div class="col-lg-5"></div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>

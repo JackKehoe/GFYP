@@ -23,6 +23,7 @@ public class ReportServiceImpl implements ReportService {
     	report.setDate(report.getDate());
     	report.setContent(report.getContent());
     	report.setUser(user);
+    	report.setUploadFile(report.getUploadFile());
         reportRepository.save(report);
     }
 
@@ -30,4 +31,15 @@ public class ReportServiceImpl implements ReportService {
     public Report findById(int id) {
         return reportRepository.findById(id);
     }
+
+	@Override
+	public void save(Report report) {
+		
+		report.setTitle(report.getTitle());
+		report.setContent(report.getContent());
+		report.setDate(report.getDate());
+		report.setUploadFile(report.getUploadFile());
+		reportRepository.save(report);
+	}
+
 }

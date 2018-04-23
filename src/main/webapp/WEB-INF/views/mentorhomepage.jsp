@@ -37,15 +37,13 @@
 				<c:forEach items="${students}" var="user">
 					<div class="panel panel-default">
 						<div class="panel-body-center">
-						<a href=${contextPath}/mentor/mentorhomepage/${userId}>${user.username}</a><br>
+						<a href=${contextPath}/mentor/student/${userId}>${user.username}</a><br>
 							<b>School:</b>${user.school}<br>
 							<b>Email:</b>${user.email}<br>
 							<div id="mainwrap"></div>
 						</div>
 					</div>
 				</c:forEach>
-				
-			</h4>
 
 			<h4>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>

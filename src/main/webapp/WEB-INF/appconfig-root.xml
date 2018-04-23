@@ -16,5 +16,5 @@
     <context:component-scan base-package="com.jack.project.*"/>
 
     <context:property-placeholder location="classpath:application.properties"/>
-    
+ 
 </beans>

@@ -5,7 +5,8 @@
              xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security.xsd">
+		http://www.springframework.org/schema/security/spring-security.xsd
+		">
 
     <http auto-config="true">
         <intercept-url pattern="/" access="hasRole('ROLE_STUDENT')" />
@@ -18,6 +19,7 @@
 		<intercept-url pattern="/student/skill" access="hasRole('ROLE_STUDENT')" />
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
+        <csrf disabled="true"/>
     </http>
 
     <authentication-manager alias="authenticationManager">
@@ -27,7 +29,13 @@
     </authentication-manager>
 
     <beans:bean id="userDetailsServiceImpl" class="com.jack.project.service.UserDetailsServiceImpl"></beans:bean>
-
+    
+       
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<beans:property name="maxUploadSize" value="20971520"/>   	
+	</beans:bean>
+    
+    
     <beans:bean id="encoder"
           class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>

@@ -1,5 +1,9 @@
 package com.jack.project.model;
 
+import java.sql.Blob;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,15 +26,19 @@ public class Report {
 	private String title;
 	private String date;
 	private String content;
+	private String uploadFile;
 	
 	private User user;
+
+	private List<Comment> comments;
 	
 	public Report() {
 		
 	}
 	
-	public Report(String date, String content) {
+	public Report(String title, String date, String content) {
 		super();
+		this.title = title;
 		this.date = date;
 		this.content = content;
 	}
@@ -66,6 +74,14 @@ public class Report {
 		this.content = content;
 	}
 	
+	public String getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(String uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	public User getUser() {
@@ -74,6 +90,15 @@ public class Report {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@OneToMany(mappedBy = "report", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 

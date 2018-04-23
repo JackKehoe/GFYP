@@ -1,9 +1,11 @@
 package com.jack.project.web;
 
+
 import com.jack.project.model.*;
 import com.jack.project.service.*;
 import com.jack.project.validator.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
@@ -15,8 +17,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/student")
@@ -56,14 +61,35 @@ public class UserController {
         return "welcome";
     }
     
+    @RequestMapping(value = "/account", method = RequestMethod.GET)
+	public String account(Model model, String error, Principal p) {
+		String name = p.getName();
+		User currentUser = userService.findByUsername(p.getName());
+		
+		model.addAttribute("userForm", userService.findByUsername(name));
+		model.addAttribute("currentUser", currentUser);
+
+
+		return "account";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public String update(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model, Principal principal) {
+		
+		String name = principal.getName();
+		userService.update(userForm, userService.findByUsername(name));
+
+		return "redirect:/student/account";
+	}
+    
    
-    @RequestMapping(value = {"/report"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/addreport"}, method = RequestMethod.GET)
     public String report(Model model) {
         model.addAttribute("reportForm", new Report());
-        return "report";
+        return "addreport";
     }
     
-    @RequestMapping(value = "/report", method = RequestMethod.POST)
+    @RequestMapping(value = "/addreport", method = RequestMethod.POST)
     public String report(@ModelAttribute("reportForm") Report reportForm, BindingResult bindingResult, Model model, Principal principal) {
         reportValidator.validate(reportForm, bindingResult);
 
@@ -83,9 +109,51 @@ public class UserController {
         return "redirect:/welcome";
     }
     
+    @RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
+	public String getReport(@PathVariable int id, Model model, Principal p) {
+		model.addAttribute("commentForm", new Comment());
+		model.addAttribute("report", reportService.findById(id));
+		return "report";
+	}
+    
+    @RequestMapping(value = "/report/edit/{id}", method = RequestMethod.GET)
+	public String get(@PathVariable int id, Model model, Principal p) {
+		model.addAttribute("reportForm", reportService.findById(id));
+		
+		System.out.print(reportService.findById(id).getUploadFile());
+
+		return "reportedit";
+	}
+    
+    @RequestMapping(value = "/report/edit/{id}", method = RequestMethod.POST)
+	public String update(@ModelAttribute("reportForm") Report report, Model model, Principal p) {
+    	report.setUploadFile(reportService.findById(report.getId()).getUploadFile());
+    	
+		System.out.println(report.getUploadFile());
+		reportService.save(report);
+		return "reportedit";
+	}
+    
+    @RequestMapping(value = "/add/{id}/uploadFile", method = RequestMethod.POST)
+	public String add(@RequestPart("uploadFile") MultipartFile file, @PathVariable int id, Model model, Principal p)
+			throws IllegalStateException, IOException {
+    	User currentUser = userService.findByUsername(p.getName());
+    	String name = p.getName();
+    	
+		Report report = reportService.findById(id);
+		String fileName = report.getId() + file.getOriginalFilename();
+		String realPathtoUploads = "C:\\Users\\jackk\\eclipse-workspace\\GFYP1\\src\\main\\webapp\\resources\\files\\"
+				+ fileName;
+		System.out.println(realPathtoUploads);
+		file.transferTo(new File(realPathtoUploads));
+		report.setUploadFile(fileName);
+		reportService.save(report, name);
+
+		return "redirect:/student/report/{id}";
+	}
     
     
-    
+ 
     @RequestMapping(value = {"/", "/skill"}, method = RequestMethod.GET)
     public String skill(Model model) {
         model.addAttribute("skillForm", new Skill());
