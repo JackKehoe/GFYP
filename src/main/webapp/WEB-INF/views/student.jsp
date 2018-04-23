@@ -36,18 +36,24 @@
 					<div class="panel panel-default">
 						<div class="panel-body-center">
 							<b><a href=${contextPath}/student/${user.id}>${user.username}</a></b><br>
-							<b>First Name: </b>${user.firstname} <br>
-							<b>Last Name: </b>${user.lastname} <br>
-							<b>Email: </b>${user.email} <br>
+							<b>First Name: </b>${user.firstname} <br> <b>Last Name:
+							</b>${user.lastname} <br> <b>Email: </b>${user.email} <br>
 							<b>School: </b>${user.school} <br>
+							<c:forEach items="${user.reports}" var="report">
+								<b><a href=${contextPath}/mentor/report/${report.id}>${report.title}</a></b><br>
+								<b>Date: </b>${report.date}<br>
+								<b>Content: </b>${report.content}<br>
+								<b>File: </b>${report.uploadFile}<br>
+							</c:forEach>
+						</div>
 					</div>
 				</div>
+				<div class="col-md-7"></div>
 			</div>
-			<div class="col-md-7"></div>
 		</div>
 	</div>
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

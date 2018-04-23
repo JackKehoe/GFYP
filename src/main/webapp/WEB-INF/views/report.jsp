@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Homepage</title>
+<title>Report</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -46,7 +46,7 @@
 					<div class="col-md-7">
 						<c:if test="${pageContext.request.isUserInRole('ROLE_MENTOR')}">
 							<form:form commandName="commentForm"
-								action="${contextPath}/mentor/comment/${comment.id}"
+								action="${contextPath}/mentor/comment/${report.id}"
 								method="POST">
 								<form:input path="content" placeholder="Write a comment"
 									cssClass="form-control" />
@@ -57,7 +57,7 @@
 						<c:forEach items="${comments}" var="comment">
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<b>${comment.mentor.username} commented:</b> ${comment.content}
+									<b>${comment.user.username} commented:</b> ${comment.content}
 								</div>
 								<div class="panel-footer">${comment.timeStamp}</div>
 							</div>

@@ -32,22 +32,27 @@
 			<h4>Current logged in user:
 				${pageContext.request.userPrincipal.name}</h4>
 			<br>
-				My Students:
-				
-				<c:forEach items="${students}" var="user">
-					<div class="panel panel-default">
-						<div class="panel-body-center">
-						<a href=${contextPath}/mentor/student/${userId}>${user.username}</a><br>
-							<b>School:</b>${user.school}<br>
-							<b>Email:</b>${user.email}<br>
-							<div id="mainwrap"></div>
-						</div>
-					</div>
-				</c:forEach>
+			
+			Sort By:
+          <a class="dropdown-item"
+				href="${contextPath}/mentor/mentorhomepage/username">Username</a>
+			<a class="dropdown-item" href="${contextPath}/mentor/mentorhomepage/email">Email</a>
+			<a class="dropdown-item" href="${contextPath}/mentor/mentorhomepage/school">School</a>
 
-			<h4>
-				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
-			</h4>
+			<c:forEach items="${students}" var="user">
+				<div class="panel panel-default">
+					<div class="panel-body-center">
+						<b><a href=${contextPath}/mentor/student/${user.id}>${user.username}</a></b><br>
+						<b>Email:</b>${user.email}<br>
+						<b>School:</b>${user.school}<br>
+						<div id="mainwrap"></div>
+					</div>
+
+				</div>
+			</c:forEach>
+				<h4>
+					<a onclick="document.forms['logoutForm'].submit()">Logout</a>
+				</h4>
 		</c:if>
 
 	</div>

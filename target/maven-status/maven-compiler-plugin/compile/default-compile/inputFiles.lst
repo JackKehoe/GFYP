@@ -4,7 +4,9 @@ C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\Re
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\SkillServiceImpl.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\LoginController.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\ReportRepository.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\CommentRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\UserController.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\CommentServiceImpl.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\SkillRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Goal.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\RoleRepository.java
@@ -15,6 +17,7 @@ C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\UserService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\MentorController.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\SkillService.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\CommentService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Comment.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\ReportService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\validator\SkillValidator.java

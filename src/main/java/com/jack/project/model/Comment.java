@@ -1,5 +1,7 @@
 package com.jack.project.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +20,7 @@ public class Comment {
 	
 	private int id;
 	private String content;
-	private String timeStamp;
+	private Date timeStamp;
 	
 	private User user;
 	private Report report;
@@ -45,11 +47,11 @@ public class Comment {
 		this.id = id;
 	}
 
-	public String getTimeStamp() {
+	public Date getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(String timeStamp) {
+	public void setTimeStamp(Date timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 	
