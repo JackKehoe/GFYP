@@ -6,21 +6,29 @@ import com.jack.project.service.*;
 import com.jack.project.validator.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
@@ -135,25 +143,24 @@ public class UserController {
 	}
     
     @RequestMapping(value = "/add/{id}/uploadFile", method = RequestMethod.POST)
-	public String add(@RequestPart("uploadFile") MultipartFile file, @PathVariable int id, Model model, Principal p)
+	public String addFile(@RequestPart("uploadFile") MultipartFile file, @PathVariable int id, Model model, Principal p)
 			throws IllegalStateException, IOException {
     	User currentUser = userService.findByUsername(p.getName());
     	String name = p.getName();
     	
 		Report report = reportService.findById(id);
 		String fileName = report.getId() + file.getOriginalFilename();
-		String realPathtoUploads = "C:\\Users\\jackk\\eclipse-workspace\\GFYP1\\src\\main\\webapp\\resources\\files\\"
-				+ fileName;
-		System.out.println(realPathtoUploads);
-		file.transferTo(new File(realPathtoUploads));
+		String fileUploadPath = "C:\\Users\\jackk\\eclipse-workspace\\GFYP1\\src\\main\\webapp\\resources\\files\\" + fileName;
+		System.out.println(fileUploadPath);
+		file.transferTo(new File(fileUploadPath));
 		report.setUploadFile(fileName);
+		
 		reportService.save(report, name);
 
 		return "redirect:/student/report/{id}";
 	}
-    
-    
- 
+       
+
     @RequestMapping(value = {"/", "/skill"}, method = RequestMethod.GET)
     public String skill(Model model) {
         model.addAttribute("skillForm", new Skill());

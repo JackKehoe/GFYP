@@ -45,6 +45,14 @@
 								<b>Content: </b>${report.content}<br>
 								<b>File: </b>${report.uploadFile}<br>
 							</c:forEach>
+							<c:forEach items="${user.skills}" var="skills">
+								<b>Skill Name: </b>${skill.skillName}<br>
+								<b>Skill Type: </b>${skill.skillType}<br>
+							</c:forEach>
+							<c:forEach items="${user.goals}" var="goals">
+								<b>Goal </b>${goal.goalName}<br>
+							</c:forEach>
+						&nbsp;	
 						</div>
 					</div>
 				</div>

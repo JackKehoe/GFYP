@@ -33,10 +33,11 @@
 				<div class="panel-group">
 					<div class="panel panel-default">
 						<div class="panel-body-center">
-							<b><a href=${contextPath}/student/report/${book.id}>${report.title}</a></b><br>
+							<b><a href=${contextPath}/student/report/${report.id}>${report.title}</a></b><br>
 							<b>Title: </b>${report.title} <br>
 							<b>Date: </b>${report.date} <br>
 							<b>Text: </b>${report.content} <br>
+							<b>File: <a href="/resources/files/${report.uploadFile}" download>file</a></b> <br>
 							<c:if test="${pageContext.request.isUserInRole('ROLE_STUDENT')}">
 								<br>
 								<a href="${contextPath}/student/report/edit/${report.id}">Edit</a>
