@@ -15,10 +15,12 @@ import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -175,24 +177,26 @@ public class UserController {
             return "skill";
         }
         
-        // Adds skill object to database and adding it to Users skill list
         String name = principal.getName();
-        skillService.save(skillForm, name);
         User currentUser = userService.findByUsername(principal.getName());
-        currentUser.addSkill(skillForm);
-        // Debug here shows that the list contains correct data and the list size
+        
         System.out.println(skillForm.getSkillName());
         System.out.println(skillForm.getCategory());
         System.out.println(currentUser.getSkills().size());
         
-        // Attempting to pass the list to NewFile.jsp to be displayed
         List<Skill> savedSkills = currentUser.getSkills();
-        for(int i = 0; i < savedSkills.size(); i++) {
-        	 model.addAttribute("savedSkills", savedSkills);
-             model.addAttribute("currentUser", currentUser);
-        }
         
+        if(savedSkills.size() < 2) {
+        	model.addAttribute("savedSkills", savedSkills);
+            model.addAttribute("currentUser", currentUser);
+            currentUser.addSkill(skillForm);
+            skillService.save(skillForm, name);
+        }
+        else {
+        	model.addAttribute("error", "Max number of skills already.");
+        }  
         return "redirect:/welcome";
+ 
     }
     
     @RequestMapping(value = {"/goal"}, method = RequestMethod.GET)

@@ -63,14 +63,7 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 
-					<form class="navbar-form navbar-left" method="get"
-						action="${contextPath}/student/search">
-						<div class="form-group" role="search">
-							<input type="text" name="searchString" class="form-control"
-								placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Search</button>
-					</form>
+					
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/student/welcome">Homepage</a></li>
 						<li><a href="${contextPath}/student/account">Account</a></li>

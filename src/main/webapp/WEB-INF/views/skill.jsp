@@ -40,8 +40,13 @@
 
 			<spring:bind path="category">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<form:input type="text" path="category" class="form-control"
-						placeholder="Category"></form:input>
+					<form:select type="select" path="category" class="form-control"
+						placeholder="Category">
+						<option value="Community Involvement ">Community Involvement </option>
+						<option value="Personal Skill">Personal Skill</option>
+						<option value="Physical Recreation">Physical Recreation</option>
+						<option value="Journey/Research">Journey/Research</option>
+					</form:select>
 					<form:errors path="category"></form:errors>
 				</div>
 			</spring:bind>

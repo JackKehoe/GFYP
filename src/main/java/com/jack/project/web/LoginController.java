@@ -69,11 +69,12 @@ public class LoginController {
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String home(Model model, String error, Principal p) {
     	User currentUser = userService.findByUsername(p.getName());
-    	if(currentUser.isMentor()) {
+    	if(currentUser.isMentor()==true) {
     		return "redirect:/mentor/mentorhomepage";
-    	}else
+    	}
+    	else {
     	return "redirect:/student/welcome";
-    	
+    	}
     }
 
 }

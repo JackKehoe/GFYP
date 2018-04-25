@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +33,8 @@
 				${pageContext.request.userPrincipal.name}</h2>
 			<br>
 			
-				Skills:	
-				<c:forEach items="${skills}" var="skill">
+			Skills:	
+			<c:forEach items="${skills}" var="skill">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b>Name:</b>${skill.skillName}<br> <b>Category:</b>${skill.category}<br>
@@ -57,13 +58,12 @@
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b><a href=${contextPath}/student/report/${report.id}>${report.title}</a></b><br>
-						<b>Date: </b>${report.date}<br>
-						<b>Content: </b>${report.content}<br>
+						<b>Date: </b>${report.date}<br> <b>Content: </b>${report.content}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
 			</c:forEach>
-
+			
 			<h4>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
 			</h4>
