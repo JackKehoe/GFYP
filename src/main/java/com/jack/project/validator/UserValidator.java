@@ -47,10 +47,10 @@ public class UserValidator implements Validator {
             errors.rejectValue("email", "Duplicate.userForm.email");
         }
         
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "NotEmpty");
-
-        
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstname", "NotEmpty");        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "lastname", "NotEmpty");
 
+       
+    
     }
 }

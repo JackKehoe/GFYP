@@ -49,12 +49,10 @@ public class MentorController {
 	@RequestMapping(value = "/mentorhomepage", method = RequestMethod.GET)
 	public String mentorhomepage(Model model, Principal p) throws IOException {
 
-		List<User> userList = userRepository.findByMentorFalse();
 		User currentUser = userService.findByUsername(p.getName());
 		List<User> students = currentUser.getStudents();
 
 		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("userList", userList);
 		model.addAttribute("students", students);
 		Collections.sort(students, (p1, p2) -> p1.getUsername().compareTo(p2.getUsername()));
 
@@ -92,7 +90,7 @@ public class MentorController {
 	@RequestMapping(value = "/viewusers", method = RequestMethod.GET)
 	public String viewUsers(Model model, Principal p) throws IOException {
 
-		List<User> userList = userRepository.findByMentorFalse();
+		List<User> userList = userService.findByHasMentorFalse();
 		User currentUser = userService.findByUsername(p.getName());
 		List<User> students = currentUser.getStudents();
 
@@ -106,8 +104,13 @@ public class MentorController {
 	@RequestMapping(value = "/viewusers/{sort}", method = RequestMethod.GET)
 	public String usersSort(@PathVariable String sort, Model model, Principal p) {
 
-		List<User> userList = userRepository.findByMentorFalse();
-		;
+//		List<User> ismentorList = userService.findByMentorFalse();
+		List<User> hasmentorList = userService.findByHasMentorFalse();
+		
+		System.out.println(hasmentorList);
+		
+		List<User> userList = new ArrayList<User>(hasmentorList);
+//		userList.addAll();
 
 		if (sort.equals("username")) {
 			System.out.println(userList);
@@ -140,9 +143,18 @@ public class MentorController {
 		String username = user.getUsername();
 
 		System.out.println(username + "saved" + "student: " + username);
+		
+		while(user.isHasMentor() == false) {
+			
+			//testing
+			System.out.println("while statement is being accessed");
+			
+			user.setHasMentor(true);
+			currentUser.saveStudent(user);
+			userRepository.save(currentUser);
+			userRepository.save(user);
 
-		currentUser.saveStudent(user);
-		userRepository.save(currentUser);
+		}
 
 		return "redirect:/mentor/mentorhomepage";
 	}
@@ -150,6 +162,7 @@ public class MentorController {
 	@RequestMapping(value = "student/{id}", method = RequestMethod.GET)
 	public String getStudent(@PathVariable int id, Model model, Principal p) {
 
+		
 		model.addAttribute("user", userService.findById(id));
 
 		return "student";
@@ -174,6 +187,8 @@ public class MentorController {
 
 		User user = userRepository.findById(id);
 		User currentUser = userService.findByUsername(p.getName());
+		
+		user.setMentor(false);
 
 		userService.addStudent(user, currentUser);
 
@@ -198,18 +213,18 @@ public class MentorController {
 	public String search(@RequestParam("searchString") String searchString, Model model, Principal principal) {
 		List<User> users = userRepository.findAll();
 		List<User> students = new ArrayList<>();
-		User currentUser = userService.findByUsername(principal.getName());
-
+		
 		for (User user : users) {
 			if (user.getUsername().toLowerCase().contains(searchString.toLowerCase())
 					|| user.getFirstname().toLowerCase().contains(searchString.toLowerCase())
 					|| user.getLastname().toLowerCase().contains(searchString.toLowerCase())
-					|| user.getLastname().toLowerCase().contains(searchString.toLowerCase())) {
+					|| user.getSchool().toLowerCase().contains(searchString.toLowerCase())) {
 				students.add(user);
 			}
 		}
 
 		model.addAttribute("userList", students);
+		model.addAttribute("users", users);
 
 		return "mentorhomepage";
 	}

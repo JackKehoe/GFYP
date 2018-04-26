@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 			user.setFirstname(user.getFirstname());
 			user.setLastname(user.getLastname());
 			user.setSchool(user.getSchool());
+			user.setHasMentor(true);
 			userRepository.save(user);
 		} else {
 			Role student = roleRepository.findByName("ROLE_STUDENT");
@@ -53,6 +54,7 @@ public class UserServiceImpl implements UserService {
 			user.setGoals(user.getGoals());
 			user.setSkills(user.getSkills());
 			user.setReports(user.getReports());
+			user.setHasMentor(false);
 			userRepository.save(user);
 		}
 	}
@@ -64,8 +66,7 @@ public class UserServiceImpl implements UserService {
 		Set<Role> studentRoles = new HashSet<>();
 		studentRoles.add(student);
 		user.setRoles(studentRoles);
-
-		user.setPassword(user.getPassword());
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setUsername(user.getUsername());
 		user.setFirstname(user.getFirstname());
 		user.setLastname(userForm.getLastname());
@@ -73,6 +74,7 @@ public class UserServiceImpl implements UserService {
 		user.setReports(user.getReports());
 		user.setSkills(user.getSkills());
 		user.setGoals(user.getGoals());
+		user.setHasMentor(user.isHasMentor());
 		userRepository.save(user);
 	}
 
@@ -98,9 +100,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByMentor(boolean mentor) {
-		return userRepository.findByMentor(mentor);
+	public List<User> findByMentorFalse() {
+
+		return userRepository.findByMentorFalse();	
 	}
+	
+	@Override
+	public List<User> findByHasMentorFalse(){
+		return userRepository.findByHasMentorFalse();
+	}
+
 
 
 }

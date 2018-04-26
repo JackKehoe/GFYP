@@ -6,4 +6,6 @@ public interface SkillService {
     void save(Skill skill, String name);
 
    	Skill findById(int id);
+   	
+   	void save(Skill skill);
 }

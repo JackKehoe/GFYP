@@ -26,7 +26,8 @@ public class User {
     private String firstname;
 	private String lastname;
 	private String school;
-	private boolean mentor = false;
+	private boolean mentor;
+	private boolean hasMentor;
     private Set<Role> roles;
     
 	private List<Skill> skills;
@@ -178,6 +179,15 @@ public class User {
 	public void saveStudent(User user) {
 		students.add(user);
 	}
+
+	public boolean isHasMentor() {
+		return hasMentor;
+	}
+
+	public void setHasMentor(boolean hasMentor) {
+		this.hasMentor = hasMentor;
+	}
+	
 
 }
 

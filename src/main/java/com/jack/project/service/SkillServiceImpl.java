@@ -1,5 +1,6 @@
 package com.jack.project.service;
 
+import com.jack.project.model.Report;
 import com.jack.project.model.Skill;
 import com.jack.project.model.User;
 import com.jack.project.repository.SkillRepository;
@@ -29,5 +30,13 @@ public class SkillServiceImpl implements SkillService {
     public Skill findById(int id) {
         return skillRepository.findById(id);
     }
+    
+    @Override
+	public void save(Skill skill) {
+		
+    	skill.setSkillName(skill.getSkillName());
+    	skill.setCategory(skill.getCategory());
+    	skillRepository.save(skill);
+	}
 }
 

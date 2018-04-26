@@ -24,7 +24,7 @@
 	<div class="container">
 		<div class="col-lg-6">
 			<div id="logbox">
-				<form:form method="POST" modelAttribute="reportForm">
+				<form:form method="POST" modelAttribute="reportForm" onsubmit="return validateForm()" action="">
 					<h2 class="form-signin-heading">Update</h2>
 					<spring:bind path="title">
 						Title
@@ -32,6 +32,15 @@
 							<form:input type="text" path="title" class="form-control"
 								placeholder="${reportForm.title}" autofocus="true"></form:input>
 							<form:errors path="title"></form:errors>
+						</div>
+					</spring:bind>
+					
+					<spring:bind path="date">
+						Date
+							<div class="form-group">
+							<form:input type="date" path="date" class="form-control"
+								placeholder="${reportForm.date}"></form:input>
+							<form:errors path="date"></form:errors>
 						</div>
 					</spring:bind>
 
@@ -69,8 +78,23 @@
 		</div>
 	</div>
 </body>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+    function validateForm()
+    {
+    	var a=document.forms["reportForm"]["title"].value;
+    	var b=document.forms["reportForm"]["content"].value;
+    	var c=document.forms["reportForm"]["date"].value;
+
+
+    	
+    	if (a==null || a=="" || b==null || b=="" || c==null || c=="")
+    		{
+    			alert("ERROR: Please fill all fields");
+    			return false;
+    		}
+    }
+</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 
 </html>

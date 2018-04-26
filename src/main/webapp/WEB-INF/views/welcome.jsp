@@ -37,7 +37,8 @@
 			<c:forEach items="${skills}" var="skill">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
-						<b>Name:</b>${skill.skillName}<br> <b>Category:</b>${skill.category}<br>
+						<b><a href=${contextPath}/student/skill/${skill.id}>${skill.skillName}</a></b><br>
+						 <b>Category:</b>${skill.category}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>

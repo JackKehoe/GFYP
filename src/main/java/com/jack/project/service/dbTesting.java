@@ -60,13 +60,14 @@ public class dbTesting {
 		user.setLastname("Kehoe");
 		user.setSchool("Naas CBS");
 		user.setMentor(false);
+		user.setHasMentor(false);
 		
 		user.setRoles(roles);
 		userRepository.save(user);
 
 		
 		User user2 = new User();
-		String password2 = "test1";
+		String password2 = "test";
 		user2.setUsername("kevin96");
 		user2.setPassword(bCryptPasswordEncoder.encode(password2));
 		user2.setEmail("kevin@email.com");
@@ -78,9 +79,21 @@ public class dbTesting {
 		user2.setRoles(roles);
 		userRepository.save(user2);	
 		
+		User user3 = new User();
+		String password3 = "test";
+		user3.setUsername("briano");
+		user3.setPassword(bCryptPasswordEncoder.encode(password3));
+		user3.setEmail("brian@gmail.com");
+		user3.setFirstname("Brian");
+		user3.setLastname("Walzer");
+		user3.setSchool("Swords Secondary School");
+		user3.setMentor(false);
+		
+		user3.setRoles(roles);
+		userRepository.save(user3);	
+		
 		
 		User mentor = new User();
-		String password3 = "test";
 		mentor.setUsername("Mentor1");
 		mentor.setPassword(bCryptPasswordEncoder.encode(password3));
 		mentor.setEmail("mentor@gmail.com");
@@ -88,6 +101,7 @@ public class dbTesting {
 		mentor.setLastname("Walzer");
 		mentor.setSchool("Naas CBS");
 		mentor.setMentor(true);
+		mentor.setHasMentor(true);
 		
 		mentor.setRoles(roles1);
 		userRepository.save(mentor);

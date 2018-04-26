@@ -19,9 +19,11 @@ public interface UserService {
 	
 	List<User> findAll();
 	
-	User findByMentor(boolean mentor);
 
 	void update(User userForm, User findByUsername);
 	
+	List<User> findByMentorFalse();
+	
+	List<User> findByHasMentorFalse();
 
 }

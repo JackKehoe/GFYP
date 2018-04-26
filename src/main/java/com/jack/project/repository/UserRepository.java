@@ -10,8 +10,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     
 	User findById(int id);
-	
-	User findByMentor(boolean mentor);
 
-	List<User> findByMentorFalse();
+	public List<User> findByMentorFalse();
+	
+	List<User> findByHasMentorFalse();
 }
