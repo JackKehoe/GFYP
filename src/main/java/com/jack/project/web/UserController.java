@@ -250,5 +250,26 @@ public class UserController {
 
 		return "redirect:/welcome";
 	}
+	
+	@RequestMapping(value = "/goal/{id}", method = RequestMethod.GET)
+	public String getGoal(@PathVariable int id, Model model, Principal p) {
+		model.addAttribute("goal", goalService.findById(id));
+		return "agoal";
+	}
+
+	@RequestMapping(value = "/goal/edit/{id}", method = RequestMethod.GET)
+	public String editGoal(@PathVariable int id, Model model, Principal p) {
+		model.addAttribute("goalForm", goalService.findById(id));
+
+		return "goaledit";
+	}
+
+	@RequestMapping(value = "/goal/edit/{id}", method = RequestMethod.POST)
+	public String updateGoal(@ModelAttribute("goalForm") Goal goal, Model model, Principal p) {
+		User currentUser = userService.findByUsername(p.getName());
+		String cuserName = currentUser.getUsername();
+		goalService.save(goal, cuserName);
+		return "goaledit";
+	}
 
 }

@@ -44,22 +44,33 @@
 				</div>
 			</c:forEach>
 			<br>
-			Goal:
+			
+			Goal:	
 			<c:forEach items="${goal}" var="goal">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
-						<b></b>${goal.goalName}<br>
+						<b><a href=${contextPath}/student/goal/${goal.id}>${goal.goalName}</a></b><br>
+						<c:if test = "${goal.goalName eq 'bronze'}">
+							<p> Bronze works!
+						</c:if>
+						<c:if test = "${goal.goalName eq 'silver'}">
+							<p> Silver works!
+						</c:if>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
 			</c:forEach>
+			<br>
+
+			
+	
 			<br>
 			Reports:
 			<c:forEach items="${savedReports}" var="report">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b><a href=${contextPath}/student/report/${report.id}>${report.title}</a></b><br>
-						<b>Date: </b>${report.date}<br> <b>Content: </b>${report.content}<br>
+						<b>Date: </b>${report.date}<br> <b>Content: </b>${report.content}<br> <b>File: </b>${report.uploadFile}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
