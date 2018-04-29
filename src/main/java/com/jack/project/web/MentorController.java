@@ -45,6 +45,8 @@ public class MentorController {
 	private ReportService reportService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private RatingService ratingService;
 
 	@RequestMapping(value = "/mentorhomepage", method = RequestMethod.GET)
 	public String mentorhomepage(Model model, Principal p) throws IOException {
@@ -172,12 +174,16 @@ public class MentorController {
 	public String getReport(@PathVariable int id, Model model, Principal p) {
 		User currentUser = userService.findByUsername(p.getName());
 		Comment commentForm = new Comment();
+		Rating ratingForm = new Rating();
 		Report report = reportService.findById((int) 1);
 		List<Comment> comments = commentService.findByReport(report);
+		List<Rating> rating = ratingService.findByReport(report);
 		
 		model.addAttribute("commentForm",commentForm);
-		model.addAttribute("comments", commentService.findByReport(reportService.findById(id)));
-		model.addAttribute("report", reportService.findById(id));
+		model.addAttribute("ratingForm", ratingForm);
+		model.addAttribute("comments", comments);
+		model.addAttribute("rating", rating);
+		model.addAttribute("report", report);
 		
 		return "report";
 	}
@@ -201,11 +207,30 @@ public class MentorController {
 		if (bindingResult.hasErrors()) {
 			return "report";
 		}
+		
 		report = reportService.findById(id);
 		String name = principal.getName();
 		User mentor = userService.findByUsername(name);
 		commentService.save(commentForm, mentor, report);
 		reportService.save(report);
+		
+		return "redirect:/mentor/report/{id}";
+	}
+	
+	@RequestMapping(value = { "/", "/rating/{id}" }, method = RequestMethod.POST)
+	public String rateReport(@PathVariable int id, Report report, @ModelAttribute("ratingForm") Rating ratingForm,
+			 Model model, Principal principal) {
+		
+		report = reportService.findById(id);
+		User currentUser = userService.findByUsername(principal.getName());
+		
+		List<Rating> savedRating = report.getRating();
+		
+		if(savedRating.size() < 1) {
+		ratingService.save(ratingForm, report);
+		reportService.save(report);
+		}
+		
 		return "redirect:/mentor/report/{id}";
 	}
 
@@ -223,10 +248,35 @@ public class MentorController {
 			}
 		}
 
-		model.addAttribute("userList", students);
+		model.addAttribute("students", students);
 		model.addAttribute("users", users);
 
 		return "mentorhomepage";
+	}
+	
+	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	public String account(Model model, String error, Principal p) {
+		String name = p.getName();
+		User currentUser = userService.findByUsername(p.getName());
+
+		model.addAttribute("userForm", userService.findByUsername(name));
+		model.addAttribute("currentUser", currentUser);
+
+		return "account";
+	}
+
+	@RequestMapping(value = {"/", "/update"}, method = RequestMethod.POST)
+	public String update(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model,
+			Principal principal) {
+
+        if (bindingResult.hasErrors()) {
+            return "account";
+        }
+		
+		String name = principal.getName();
+		userService.update(userForm, userService.findByUsername(name));
+
+		return "redirect:/mentor/account";
 	}
 	
 	

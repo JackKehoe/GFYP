@@ -46,6 +46,8 @@ public class UserController {
 	private SkillService skillService;
 	@Autowired
 	private GoalService goalService;
+	@Autowired
+	private CommentService commentService;
 
 	@Autowired
 	private UserValidator userValidator;
@@ -80,10 +82,9 @@ public class UserController {
 		return "account";
 	}
 
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = {"/", "/update"}, method = RequestMethod.POST)
 	public String update(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model,
 			Principal principal) {
-		userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "account";
@@ -124,8 +125,13 @@ public class UserController {
 
 	@RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
 	public String getReport(@PathVariable int id, Model model, Principal p) {
+		
+		Report report = reportService.findById(id);
+		report.getComments();
+		
 		model.addAttribute("commentForm", new Comment());
 		model.addAttribute("report", reportService.findById(id));
+		model.addAttribute("comments", commentService.findByReport(report));
 		return "report";
 	}
 

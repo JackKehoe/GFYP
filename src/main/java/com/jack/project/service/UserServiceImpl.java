@@ -62,19 +62,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void update(User userForm, User user) {
 
-		Role student = roleRepository.findByName("ROLE_STUDENT");
-		Set<Role> studentRoles = new HashSet<>();
-		studentRoles.add(student);
-		user.setRoles(studentRoles);
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setUsername(user.getUsername());
-		user.setFirstname(user.getFirstname());
+//		Role student = roleRepository.findByName("ROLE_STUDENT");
+//		Set<Role> studentRoles = new HashSet<>();
+//		studentRoles.add(student);
+//		user.setRoles(studentRoles);
+		user.setFirstname(userForm.getFirstname());
 		user.setLastname(userForm.getLastname());
-		user.setEmail(user.getEmail());
-		user.setReports(user.getReports());
-		user.setSkills(user.getSkills());
-		user.setGoals(user.getGoals());
-		user.setHasMentor(user.isHasMentor());
+		user.setSchool(userForm.getSchool());
+//		user.setUsername(userForm.getUsername());
+//		user.setEmail(userForm.getEmail());
+//		user.setReports(user.getReports());
+//		user.setSkills(user.getSkills());
+//		user.setGoals(user.getGoals());
+//		user.setHasMentor(user.isHasMentor());
 		userRepository.save(user);
 	}
 

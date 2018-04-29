@@ -1,16 +1,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="">
 
 <title>Homepage</title>
 
@@ -38,7 +34,7 @@
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b><a href=${contextPath}/student/skill/${skill.id}>${skill.skillName}</a></b><br>
-						 <b>Category:</b>${skill.category}<br>
+						<b>Category:</b>${skill.category}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
@@ -50,11 +46,11 @@
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b><a href=${contextPath}/student/goal/${goal.id}>${goal.goalName}</a></b><br>
-						<c:if test = "${goal.goalName eq 'bronze'}">
-							<p> Bronze works!
+						<c:if test="${goal.goalName eq 'bronze'}">
+							<p>Bronze works!
 						</c:if>
-						<c:if test = "${goal.goalName eq 'silver'}">
-							<p> Silver works!
+						<c:if test="${goal.goalName eq 'silver'}">
+							<p>Silver works!
 						</c:if>
 						<div id="mainwrap"></div>
 					</div>
@@ -62,20 +58,21 @@
 			</c:forEach>
 			<br>
 
-			
-	
+
+
 			<br>
 			Reports:
 			<c:forEach items="${savedReports}" var="report">
 				<div class="panel panel-default">
 					<div class="panel-body-center">
 						<b><a href=${contextPath}/student/report/${report.id}>${report.title}</a></b><br>
-						<b>Date: </b>${report.date}<br> <b>Content: </b>${report.content}<br> <b>File: </b>${report.uploadFile}<br>
+						<b>Date: </b>${report.date}<br> <b>Content: </b>${report.content}<br>
+						<b>File: </b>${report.uploadFile}<br>
 						<div id="mainwrap"></div>
 					</div>
 				</div>
 			</c:forEach>
-			
+
 			<h4>
 				<a onclick="document.forms['logoutForm'].submit()">Logout</a>
 			</h4>
@@ -83,8 +80,7 @@
 
 	</div>
 	<div class="col-lg-5"></div>
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="${contextPath}/resources/js/popper.min.js"></script>
 	<script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

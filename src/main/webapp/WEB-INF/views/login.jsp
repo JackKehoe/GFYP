@@ -24,6 +24,10 @@
 
 <div class="container">
 
+	<div align="center">
+	<img src="/resources/files/Nasc.png" alt="Nasc" class="center">
+	</div>
+	
     <form method="POST" action="${contextPath}/login" class="form-signin">
         <h2 class="form-heading">Log in</h2>
 

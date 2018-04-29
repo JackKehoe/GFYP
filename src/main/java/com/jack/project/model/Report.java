@@ -31,6 +31,7 @@ public class Report {
 	private User user;
 
 	private List<Comment> comments;
+	private List<Rating> ratings;
 	
 	public Report() {
 		
@@ -96,9 +97,19 @@ public class Report {
 	public List<Comment> getComments() {
 		return comments;
 	}
+	
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	@OneToMany(mappedBy = "report", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	public List<Rating> getRating() {
+		return ratings;
+	}
+	
+	public void setRating(List<Rating> ratings) {
+		this.ratings = ratings;
 	}
 
 

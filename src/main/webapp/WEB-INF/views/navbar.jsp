@@ -28,8 +28,9 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="${contextPath}/mentor/mentorhomepage">
-						 Gaisce</a>
+					<a href="${contextPath}/mentor/mentorhomepage"> <img border="0"
+						alt="nasc" src="/resources/files/Nasc.png" width="80" height="50">
+					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<form class="navbar-form navbar-left" method="get"
@@ -42,10 +43,10 @@
 					</form>
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/mentor/mentorhomepage">Homepage</a></li>
+						<li><a href="${contextPath}/mentor/account">Account</a></li>
 						<li><a href="${contextPath}/mentor/viewusers">View Users</a></li>
 						<li><a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
 					</ul>
-
 				</div>
 			</c:if>
 
@@ -58,12 +59,13 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="${contextPath}/student/welcome">
-						Gaisce</a>
+					<a href="${contextPath}/student/welcome"> <img border="0"
+						alt="nasc" src="/resources/files/Nasc.png" width="80" height="50">
+					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 
-					
+
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/student/welcome">Homepage</a></li>
 						<li><a href="${contextPath}/student/account">Account</a></li>
@@ -72,12 +74,13 @@
 						<li><a href="${contextPath}/student/goal">Goals </a></li>
 						<li><a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
 					</ul>
-
 				</div>
 			</c:if>
 		</div>
-</nav>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	</nav>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
 </body>
 </html>

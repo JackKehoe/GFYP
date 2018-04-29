@@ -24,6 +24,8 @@ public class ReportServiceImpl implements ReportService {
     	report.setContent(report.getContent());
     	report.setUser(user);
     	report.setUploadFile(report.getUploadFile());
+    	report.setRating(report.getRating());
+    	report.setComments(report.getComments());
         reportRepository.save(report);
     }
 
@@ -39,6 +41,7 @@ public class ReportServiceImpl implements ReportService {
 		report.setContent(report.getContent());
 		report.setDate(report.getDate());
 		report.setUploadFile(report.getUploadFile());
+		report.setRating(report.getRating());
 		reportRepository.save(report);
 	}
 

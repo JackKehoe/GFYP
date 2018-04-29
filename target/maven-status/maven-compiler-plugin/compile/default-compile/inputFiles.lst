@@ -6,6 +6,7 @@ C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\LoginC
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\ReportRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\CommentRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\UserController.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Rating.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\CommentServiceImpl.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\SkillRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Goal.java
@@ -18,10 +19,13 @@ C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\Us
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\web\MentorController.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\SkillService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\CommentService.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\RatingService.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\RatingServiceImpl.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Comment.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\ReportService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\validator\SkillValidator.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\UserServiceImpl.java
+C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\repository\RatingRepository.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\service\SecurityService.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\model\Role.java
 C:\Users\jackk\eclipse-workspace\GFYP1\src\main\java\com\jack\project\validator\UserValidator.java

@@ -17,6 +17,7 @@
 		<intercept-url pattern="/student/goal" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/student/report" access="hasRole('ROLE_STUDENT')" />
 		<intercept-url pattern="/student/skill" access="hasRole('ROLE_STUDENT')" />
+		<intercept-url pattern="/student/welcome" access="hasRole('ROLE_STUDENT')" />	
         <form-login login-page="/login" default-target-url="/welcome" authentication-failure-url="/login?error" username-parameter="username" password-parameter="password"/>
         <logout logout-success-url="/login?logout" />
         <csrf disabled="true"/>

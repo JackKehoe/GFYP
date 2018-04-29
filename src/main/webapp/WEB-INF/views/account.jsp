@@ -24,70 +24,93 @@
 
 		<div class="col-lg-7">
 			<div id="logbox">
-				<form:form method="POST" modelAttribute="userForm"
-					class="form-signin"
-					action="${contextPath}/student/update">
-					<h2 class="form-signin-heading">Update Account</h2>
+				<c:if test="${pageContext.request.isUserInRole('ROLE_STUDENT')}">
+					<form:form method="POST" modelAttribute="userForm"
+						class="form-signin" action="${contextPath}/student/update">
+						<h2 class="form-signin-heading">Update Account</h2>
 
-						Username						
-						<spring:bind path="username">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="text" path="username"
-								value="${currentUser.username}" class="form-control"
-								placeholder="Username"></form:input>
-							<form:errors path="username"></form:errors>
-						</div>
-					</spring:bind>
 						First Name
 						<spring:bind path="firstname">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="text" path="firstname"
-								value="${currentUser.firstname}" class="form-control"
-								placeholder="First name"></form:input>
-							<form:errors path="firstname"></form:errors>
-						</div>
-					</spring:bind>
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="firstname"
+									value="${currentUser.firstname}" class="form-control"
+									placeholder="First name"></form:input>
+								<form:errors path="firstname"></form:errors>
+							</div>
+						</spring:bind>
 					
 						Last Name
 						<spring:bind path="lastname">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="text" path="lastname"
-								value="${currentUser.lastname}" class="form-control"
-								placeholder="Last name"></form:input>
-							<form:errors path="lastname"></form:errors>
-						</div>
-					</spring:bind>
-						Email
-						<spring:bind path="email">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="text" path="email" value="${currentUser.email}"
-								class="form-control" placeholder="Email"></form:input>
-							<form:errors path="email"></form:errors>
-						</div>
-					</spring:bind>
-						Password
-						<spring:bind path="password">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="password" path="password"
-								 class="form-control"
-								placeholder="password"></form:input>
-							<form:errors path="password"></form:errors>
-						</div>
-					</spring:bind>
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="lastname"
+									value="${currentUser.lastname}" class="form-control"
+									placeholder="Last name"></form:input>
+								<form:errors path="lastname"></form:errors>
+							</div>
+						</spring:bind>
+
 						School
 						<spring:bind path="school">
-						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="text" path="school"
-								value="${currentUser.school}" class="form-control"
-								placeholder="school"></form:input>
-							<form:errors path="school"></form:errors>
-						</div>
-					</spring:bind>
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="school"
+									value="${currentUser.school}" class="form-control"
+									placeholder="school"></form:input>
+								<form:errors path="school"></form:errors>
+							</div>
+						</spring:bind>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+						<div class="text-center"></div>
+					</form:form>
+				</c:if>
+				
+				<c:if test="${pageContext.request.isUserInRole('ROLE_MENTOR')}">
+					<form:form method="POST" modelAttribute="userForm"
+						class="form-signin" action="${contextPath}/mentor/update">
+						<h2 class="form-signin-heading">Update Account</h2>
 
+						First Name
+						<spring:bind path="firstname">
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="firstname"
+									value="${currentUser.firstname}" class="form-control"
+									placeholder="First name"></form:input>
+								<form:errors path="firstname"></form:errors>
+							</div>
+						</spring:bind>
+					
+						Last Name
+						<spring:bind path="lastname">
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="lastname"
+									value="${currentUser.lastname}" class="form-control"
+									placeholder="Last name"></form:input>
+								<form:errors path="lastname"></form:errors>
+							</div>
+						</spring:bind>
 
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
-					<div class="text-center"></div>
-				</form:form>
+						School
+						<spring:bind path="school">
+							<div class="form-group ${status.error ? 'has-error' : ''}">
+								<form:input type="text" path="school"
+									value="${currentUser.school}" class="form-control"
+									placeholder="school"></form:input>
+								<form:errors path="school"></form:errors>
+							</div>
+						</spring:bind>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+						<div class="text-center"></div>
+					</form:form>
+				</c:if>
+				
+				<H2>Account Details</H2>
+				<br>
+				<H4>
+					<b>Username: </b>${userForm.username}<br> <br> <b>Firstname:
+					</b>${userForm.firstname}<br> <br> <b>Lastname: </b>${userForm.lastname}<br>
+					<br> <b>Email: </b>${userForm.email}<br> <br> <b>School:
+					</b>${userForm.school}<br> <br>
+				</H4>
+
 			</div>
 		</div>
 	</div>
