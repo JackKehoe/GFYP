@@ -49,23 +49,21 @@
 								action="${contextPath}/mentor/comment/${report.id}"
 								method="POST">
 								<form:input path="content" placeholder="Write a comment"
-									cssClass="form-control" />
+									size="30"/>
 								<input type="submit" class="btn btn-failure btn-sm" value="Post" />
 							</form:form>
 							&nbsp;
 							<form:form commandName="ratingForm"
 								action="${contextPath}/mentor/rating/${report.id}" method="POST">
-									<form:radiobutton path="reportRating" value="pass" label="Pass" />
-									<form:radiobutton path="reportRating" value="fail" label="Fail" />
-									<input type="submit" class="btn btn-sm" value="Post" />
+								<form:radiobutton path="reportRating" value="pass" label="Pass" />
+								<form:radiobutton path="reportRating" value="fail" label="Fail" />
+								<input type="submit" class="btn btn-sm" value="Post" />
 							</form:form>
 						</c:if>
 						&nbsp;
 						<c:forEach items="${rating}" var="rating">
 							<div class="panel panel-default">
-								<div class="panel-body">
-								 ${rating.reportRating}
-								</div>
+								<div class="panel-body">${rating.reportRating}</div>
 							</div>
 						</c:forEach>
 						&nbsp;
@@ -77,7 +75,7 @@
 								<div class="panel-footer">${comment.timeStamp}</div>
 							</div>
 						</c:forEach>
-						
+
 
 					</div>
 				</div>

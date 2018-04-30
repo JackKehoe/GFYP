@@ -1,6 +1,7 @@
 package com.jack.project.web;
 
 import com.jack.project.model.*;
+import com.jack.project.repository.RatingRepository;
 import com.jack.project.service.*;
 import com.jack.project.validator.*;
 
@@ -48,6 +49,10 @@ public class UserController {
 	private GoalService goalService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private RatingService ratingService;
+	@Autowired
+	private RatingRepository ratingRepository;
 
 	@Autowired
 	private UserValidator userValidator;
@@ -59,15 +64,27 @@ public class UserController {
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String welcome(Model model, Principal principal) throws IOException {
 		User currentUser = userService.findByUsername(principal.getName());
+		
 		List<Skill> skills = currentUser.getSkills();
 		List<Goal> goal = currentUser.getGoals();
 		List<Report> savedReports = currentUser.getReports();
-
+		List<Rating> reportRatings = new ArrayList<Rating>();
+		List<Rating> allRatings = new ArrayList<Rating>();
+		
+		for (int i=0; i < savedReports.size(); i++) {
+			int id = savedReports.get(i).getId();
+			Report areport = reportService.findById(id);
+			reportRatings = areport.getRating();
+			List<Rating> arating = ratingService.findByReport(areport);
+			allRatings.addAll(arating);
+		}
+		
 		model.addAttribute("skills", skills);
 		model.addAttribute("goal", goal);
 		model.addAttribute("savedReports", savedReports);
 		model.addAttribute("currentUser", currentUser);
-
+		model.addAttribute("allRatings", allRatings);
+		
 		return "welcome";
 	}
 
@@ -132,6 +149,8 @@ public class UserController {
 		model.addAttribute("commentForm", new Comment());
 		model.addAttribute("report", reportService.findById(id));
 		model.addAttribute("comments", commentService.findByReport(report));
+		model.addAttribute("rating", ratingService.findByReport(report));
+		
 		return "report";
 	}
 
@@ -199,7 +218,7 @@ public class UserController {
 
 		List<Skill> savedSkills = currentUser.getSkills();
 
-		if (savedSkills.size() < 2) {
+		if (savedSkills.size() < 4) {
 			model.addAttribute("savedSkills", savedSkills);
 			model.addAttribute("currentUser", currentUser);
 			currentUser.addSkill(skillForm);

@@ -40,23 +40,21 @@
 							<b>First Name: </b>${user.firstname} <br> <b>Last Name:
 							</b>${user.lastname} <br> <b>Email: </b>${user.email} <br>
 							<b>School: </b>${user.school} <br>
-							&nbsp;
+							
 							<c:forEach items="${user.skills}" var="skills">
 								<b>Skill Name: </b>${skills.skillName}<br>
 								<b>Skill Type: </b>${skills.category}<br>
 							</c:forEach>
-							&nbsp;
 							<c:forEach items="${user.goals}" var="goals">
 								<b>Goal </b>${goals.goalName}<br>
 							</c:forEach>
-							&nbsp;
+							
 							<c:forEach items="${user.reports}" var="report">
 								<b><a href=${contextPath}/mentor/report/${report.id}>${report.title}</a></b><br>
 								<b>Date: </b>${report.date}<br>
 								<b>Content: </b>${report.content}<br>
 								<b>File: </b>${report.uploadFile}<br>
 							</c:forEach>
-							&nbsp;	
 						</div>
 					</div>
 				</div>

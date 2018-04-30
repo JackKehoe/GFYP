@@ -42,7 +42,7 @@
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:select type="select" path="category" class="form-control"
 						placeholder="Category">
-						<option value="Community Involvement ">Community Involvement </option>
+						<option value="Community Involvement">Community Involvement </option>
 						<option value="Personal Skill">Personal Skill</option>
 						<option value="Physical Recreation">Physical Recreation</option>
 						<option value="Journey/Research">Journey/Research</option>

@@ -29,7 +29,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a href="${contextPath}/mentor/mentorhomepage"> <img border="0"
-						alt="nasc" src="/resources/files/Nasc.png" width="80" height="50">
+						alt="nasc" src="/resources/files/nascnavbar.png" width="80" height="50">
 					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
@@ -45,6 +45,7 @@
 						<li><a href="${contextPath}/mentor/mentorhomepage">Homepage</a></li>
 						<li><a href="${contextPath}/mentor/account">Account</a></li>
 						<li><a href="${contextPath}/mentor/viewusers">View Users</a></li>
+						<li><a href="${contextPath}/mentor/statistics">Statistics</a></li>
 						<li><a onclick="document.forms['logoutForm'].submit()">Logout</a></li>
 					</ul>
 				</div>
@@ -60,7 +61,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a href="${contextPath}/student/welcome"> <img border="0"
-						alt="nasc" src="/resources/files/Nasc.png" width="80" height="50">
+						alt="nasc" src="/resources/files/nascnavbar.png" width="80" height="50">
 					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">

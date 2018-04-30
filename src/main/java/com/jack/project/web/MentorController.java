@@ -47,6 +47,8 @@ public class MentorController {
 	private CommentService commentService;
 	@Autowired
 	private RatingService ratingService;
+	@Autowired
+	private SkillService skillService;
 
 	@RequestMapping(value = "/mentorhomepage", method = RequestMethod.GET)
 	public String mentorhomepage(Model model, Principal p) throws IOException {
@@ -173,9 +175,10 @@ public class MentorController {
 	@RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
 	public String getReport(@PathVariable int id, Model model, Principal p) {
 		User currentUser = userService.findByUsername(p.getName());
+		
 		Comment commentForm = new Comment();
 		Rating ratingForm = new Rating();
-		Report report = reportService.findById((int) 1);
+		Report report = reportService.findById((int) id);
 		List<Comment> comments = commentService.findByReport(report);
 		List<Rating> rating = ratingService.findByReport(report);
 		
@@ -277,6 +280,40 @@ public class MentorController {
 		userService.update(userForm, userService.findByUsername(name));
 
 		return "redirect:/mentor/account";
+	}
+	
+	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
+	public String statistics(Model model, Principal p) throws IOException {
+	
+		User currentUser = userService.findByUsername(p.getName());
+		List<User> students = currentUser.getStudents();
+		List<Skill> studentSkills = null;
+		List<Skill> allSkills = new ArrayList<Skill>();
+		List<Goal> studentGoals = null;
+		List<Goal> allGoals = new ArrayList<Goal>();
+
+
+		for (int i = 0; i < students.size(); i++) {
+			String name = students.get(i).getUsername();
+			User astudent = userService.findByUsername(name);
+			studentSkills = astudent.getSkills();
+			allSkills.addAll(studentSkills);
+		}
+		
+		for (int i = 0; i < students.size(); i++) {
+			String name = students.get(i).getUsername();
+			User astudent = userService.findByUsername(name);
+			studentGoals = astudent.getGoals();
+			allGoals.addAll(studentGoals);
+		}
+			
+		model.addAttribute("allGoals", allGoals);
+		model.addAttribute("allSkills", allSkills);
+		model.addAttribute("studentSkills", studentSkills);
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("students", students);
+
+		return "statistics";
 	}
 	
 	

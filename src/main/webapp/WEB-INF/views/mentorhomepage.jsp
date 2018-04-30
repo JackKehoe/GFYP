@@ -14,7 +14,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Welcome</title>
+<title>Homepage</title>
 
 <link href="${contextPath}/resources/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -27,7 +27,7 @@
 
 		<c:if test="${pageContext.request.userPrincipal.name != null}">
 
-			<h4>Welcome, :
+			<h4>Welcome, 
 				${pageContext.request.userPrincipal.name}</h4>
 			<br>
 			
